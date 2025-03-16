@@ -7,18 +7,29 @@ const soundButtons = document.querySelectorAll(".sound-picker button");
 
 let duration = 600;
 let timer;
+let playing = false;
+
+// Ensure media loads correctly
+audio.onerror = () => console.error("Error loading audio file");
+video.onerror = () => console.error("Error loading video file");
 
 playButton.addEventListener("click", () => {
-    if (audio.paused) {
-        audio.play();
-        video.play();
-        playButton.textContent = "Pause";
-        startTimer();
+    if (!playing) {
+        if (audio.readyState >= 2 && video.readyState >= 2) { // Ensure media is ready
+            audio.play();
+            video.play();
+            playButton.textContent = "Pause";
+            startTimer();
+            playing = true;
+        } else {
+            console.error("Media not ready to play.");
+        }
     } else {
         audio.pause();
         video.pause();
         playButton.textContent = "Play";
         clearInterval(timer);
+        playing = false;
     }
 });
 
@@ -33,11 +44,15 @@ soundButtons.forEach(button => {
     button.addEventListener("click", () => {
         video.src = button.getAttribute("data-video");
         audio.src = button.getAttribute("data-sound");
+
+        // Reload and play new media
         video.load();
         audio.load();
-        video.play();
-        audio.play();
+        video.oncanplaythrough = () => video.play();
+        audio.oncanplaythrough = () => audio.play();
+
         playButton.textContent = "Pause";
+        playing = true;
         startTimer();
     });
 });
@@ -54,6 +69,7 @@ function startTimer() {
             audio.pause();
             video.pause();
             playButton.textContent = "Play";
+            playing = false;
         }
     }, 1000);
 }
@@ -61,5 +77,5 @@ function startTimer() {
 function updateTimeDisplay(time = duration) {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
