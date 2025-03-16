@@ -1,39 +1,44 @@
-/*  your css code here. If applicable */
 body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #000;
-            color: white;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-        }
-        .vid-container {
-            position: relative;
-            width: 80%;
-            max-width: 600px;
-        }
-        video {
-            width: 100%;
-            border-radius: 10px;
-        }
-        .player-container, .sound-picker, #time-select {
-            margin: 20px 0;
-        }
-        .time-display {
-            font-size: 2em;
-            margin: 10px 0;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            background: #3498db;
-            color: white;
-            border-radius: 5px;
-        }
-        .play {
-            background: #2ecc71;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+    color: white;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.vid-container {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.player-container, .sound-picker, .time-select {
+    margin: 20px 0;
+}
+
+.time-display {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+}
+
+.play {
+    background: #2ecc71;
+}
